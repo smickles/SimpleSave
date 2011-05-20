@@ -10,47 +10,50 @@ import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class SSplayerListener extends PlayerListener{
-	
+
 	private int players = 0;
 	public SimpleSave plugin;
 	public SSplayerListener(SimpleSave instance){
-        plugin = instance;
+		plugin = instance;
 	}
+	@Override
 	public void onPlayerJoin(PlayerJoinEvent event) {
-		
-		players++;
-        if(players >= 1) {
-        	if(plugin.ConfigArray[0].equals("true")){
-     	    long saveinterval = java.lang.Integer.parseInt(plugin.ConfigArray[1].replaceAll("\\D", "")) * 1200;
-     		plugin.ScheduleSave(saveinterval);
-     		plugin.log.info("SimpleSave: Current save interval is " + plugin.ConfigArray[1] + " minute(s)");
-     	  } 
-     	 if(plugin.ConfigArray[6].equals("true")){
-     		 long saveinterval = java.lang.Integer.parseInt(plugin.ConfigArray[7].replaceAll("\\D", "")) * 1200;
-     		plugin.ScheduleBackup(saveinterval);
-     		plugin.log.info("SimpleSave: Current backup interval is " + plugin.ConfigArray[7] + " minute(s)");
-     	 }
-     }
-  }
 
+		players++;
+		if(players == 1) {
+			if(plugin.ConfigArray[0].equals("true")){
+				long saveinterval = java.lang.Integer.parseInt(plugin.ConfigArray[1].replaceAll("\\D", "")) * 1200;
+				plugin.ScheduleSave(saveinterval);
+				plugin.log.info("SimpleSave: Current save interval is " + plugin.ConfigArray[1] + " minute(s)");
+			}
+			if(plugin.ConfigArray[6].equals("true")){
+				long saveinterval = java.lang.Integer.parseInt(plugin.ConfigArray[7].replaceAll("\\D", "")) * 1200;
+				plugin.ScheduleBackup(saveinterval);
+				plugin.log.info("SimpleSave: Current backup interval is " + plugin.ConfigArray[7] + " minute(s)");
+			}
+		}
+	}
+
+	@Override
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		players--;
 
 		if(players == 0) {
 			plugin.getServer().getScheduler().cancelTasks(plugin);
-	        plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, plugin.new SaveMethod());
-	        plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.new BackupMethod());
-	       
+			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, plugin.new SaveMethod());
+			plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.new BackupMethod());
+
 		}
 	}
 
+	@Override
 	public void onPlayerKick(PlayerKickEvent event) {
-	    players--;
-	    if(players == 0) {
-	    	plugin.getServer().getScheduler().cancelTasks(plugin);
-	    	plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, plugin.new SaveMethod());
-	        plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.new BackupMethod());
-	       
-	    }
+		players--;
+		if(players == 0) {
+			plugin.getServer().getScheduler().cancelTasks(plugin);
+			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, plugin.new SaveMethod());
+			plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.new BackupMethod());
+
+		}
 	}
 }
