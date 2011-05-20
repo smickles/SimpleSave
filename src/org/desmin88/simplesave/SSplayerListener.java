@@ -37,8 +37,7 @@ public class SSplayerListener extends PlayerListener{
 	@Override
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		players--;
-
-		if(players == 0) {
+		if(players == 0 | plugin.ConfigArray[20].equals("false")) {
 			plugin.getServer().getScheduler().cancelTasks(plugin);
 			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, plugin.new SaveMethod());
 			plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.new BackupMethod());
@@ -49,7 +48,7 @@ public class SSplayerListener extends PlayerListener{
 	@Override
 	public void onPlayerKick(PlayerKickEvent event) {
 		players--;
-		if(players == 0) {
+		if(players == 0 | plugin.ConfigArray[20].equals("false")) {
 			plugin.getServer().getScheduler().cancelTasks(plugin);
 			plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, plugin.new SaveMethod());
 			plugin.getServer().getScheduler().scheduleAsyncDelayedTask(plugin, plugin.new BackupMethod());
