@@ -1,0 +1,9 @@
+name: SimpleSave
+main: org.desmin88.simplesave.SimpleSave
+version: 3.0
+author: desmin88
+description: Automatically saves and backups world and player data
+commands:
+  ssBackup:
+    description: Manual Backup
+    usage: /ssBackup
