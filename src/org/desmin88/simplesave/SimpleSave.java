@@ -73,7 +73,7 @@ public class SimpleSave extends JavaPlugin {
 			ConfigArray = FixConfig();
 
 		}
-		log.info("SimpleSave: 3.02 Initialized");
+		log.info("SimpleSave: 3.03 Initialized");
 
 		if(ConfigArray[17].equals("true")){
 			ConsoleCommandSender ccs = new ConsoleCommandSender(getServer());
@@ -198,7 +198,7 @@ public class SimpleSave extends JavaPlugin {
 			simplesaveproperties.setProperty("backup.history.length","5");
 			simplesaveproperties.setProperty("backup.directory", "backup");
 			simplesaveproperties.setProperty("plugin.send.saveoff-on", "true");
-			simplesaveproperties.setProperty("plugin.version", "3.02");
+			simplesaveproperties.setProperty("plugin.version", "3.03");
 			simplesaveproperties.setProperty("backup.date.format", "yyyy-MM-dd hh-mm-ss");
 			simplesaveproperties.setProperty("backup.world.filter", "");
 			simplesaveproperties.setProperty("plugin.ignore.noplayers", "false");
@@ -225,6 +225,8 @@ public class SimpleSave extends JavaPlugin {
 		ConfigArray[11] = simplesaveproperties.getProperty("backup.message.color");
 		ConfigArray[12] = simplesaveproperties.getProperty("plugin.version");
 		ConfigArray[13] = simplesaveproperties.getProperty("backup.history.length");
+		ConfigArray[14] = "";
+		ConfigArray[15] = "";
 		ConfigArray[16] = simplesaveproperties.getProperty("backup.directory");
 		ConfigArray[17] = simplesaveproperties.getProperty("plugin.send.saveoff-on");
 		ConfigArray[18] = simplesaveproperties.getProperty("backup.date.format");
