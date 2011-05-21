@@ -187,14 +187,12 @@ public class SimpleSave extends JavaPlugin {
 			simplesaveproperties.setProperty("save.message.ending", "[SimpleSave] Ending world save");
 			simplesaveproperties.setProperty("save.message.send", "true");
 			simplesaveproperties.setProperty("save.message.color", "RED");
-
 			simplesaveproperties.setProperty("backup.use", "true");
 			simplesaveproperties.setProperty("backup.interval", "60");
 			simplesaveproperties.setProperty("backup.message.starting", "[SimpleSave] Beginning world backup");
 			simplesaveproperties.setProperty("backup.message.ending", "[SimpleSave] Ending world backup");
 			simplesaveproperties.setProperty("backup.message.send", "true");
 			simplesaveproperties.setProperty("backup.message.color", "RED");
-
 			simplesaveproperties.setProperty("backup.history.length","5");
 			simplesaveproperties.setProperty("backup.directory", "backup");
 			simplesaveproperties.setProperty("plugin.send.saveoff-on", "true");
