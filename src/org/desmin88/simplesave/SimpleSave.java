@@ -73,7 +73,7 @@ public class SimpleSave extends JavaPlugin {
 			ConfigArray = FixConfig();
 
 		}
-		log.info("SimpleSave: 3.0 Initialized");
+		log.info("SimpleSave: 3.02 Initialized");
 
 		if(ConfigArray[17].equals("true")){
 			ConsoleCommandSender ccs = new ConsoleCommandSender(getServer());
@@ -187,19 +187,19 @@ public class SimpleSave extends JavaPlugin {
 			simplesaveproperties.setProperty("save.message.ending", "[SimpleSave] Ending world save");
 			simplesaveproperties.setProperty("save.message.send", "true");
 			simplesaveproperties.setProperty("save.message.color", "RED");
-			simplesaveproperties.setProperty("save.message.noplayers", "true");
+
 			simplesaveproperties.setProperty("backup.use", "true");
 			simplesaveproperties.setProperty("backup.interval", "60");
 			simplesaveproperties.setProperty("backup.message.starting", "[SimpleSave] Beginning world backup");
 			simplesaveproperties.setProperty("backup.message.ending", "[SimpleSave] Ending world backup");
 			simplesaveproperties.setProperty("backup.message.send", "true");
 			simplesaveproperties.setProperty("backup.message.color", "RED");
-			simplesaveproperties.setProperty("backup.message.noplayers", "true");
+
 			simplesaveproperties.setProperty("backup.history.length","5");
 			simplesaveproperties.setProperty("backup.directory", "backup");
 			simplesaveproperties.setProperty("plugin.send.saveoff-on", "true");
-			simplesaveproperties.setProperty("plugin.version", "3.0");
-			simplesaveproperties.setProperty("backup.date.format", "yyyy-mm-dd hh-mm-ss");
+			simplesaveproperties.setProperty("plugin.version", "3.02");
+			simplesaveproperties.setProperty("backup.date.format", "yyyy-MM-dd hh-mm-ss");
 			simplesaveproperties.setProperty("backup.world.filter", "");
 			simplesaveproperties.setProperty("plugin.ignore.noplayers", "false");
 			simplesaveproperties.store(out = new FileOutputStream("plugins/SimpleSave/config.properties"),"SimpleSave Config File ");
@@ -223,10 +223,8 @@ public class SimpleSave extends JavaPlugin {
 		ConfigArray[9] = simplesaveproperties.getProperty("backup.message.ending");
 		ConfigArray[10] = simplesaveproperties.getProperty("backup.message.send");
 		ConfigArray[11] = simplesaveproperties.getProperty("backup.message.color");
-		ConfigArray[13] = simplesaveproperties.getProperty("backup.history.length");
 		ConfigArray[12] = simplesaveproperties.getProperty("plugin.version");
-		ConfigArray[14] = simplesaveproperties.getProperty("save.message.noplayers");
-		ConfigArray[15] = simplesaveproperties.getProperty("backup.message.noplayers");
+		ConfigArray[13] = simplesaveproperties.getProperty("backup.history.length");
 		ConfigArray[16] = simplesaveproperties.getProperty("backup.directory");
 		ConfigArray[17] = simplesaveproperties.getProperty("plugin.send.saveoff-on");
 		ConfigArray[18] = simplesaveproperties.getProperty("backup.date.format");
