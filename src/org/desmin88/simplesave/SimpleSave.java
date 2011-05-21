@@ -157,7 +157,6 @@ public class SimpleSave extends JavaPlugin {
 		getServer().savePlayers();
 	}
 	class CCSFilter implements Filter{
-
 		String LS1 = "Disabling level saving..";
 		String LS2 = "ConsoleCommandSender: Disabling level saving..";
 		String LS3 = "Enabling level saving..";

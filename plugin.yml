@@ -5,5 +5,5 @@ author: desmin88
 description: Automatically saves and backups world and player data
 commands:
   ssBackup:
-    description: Manual Backup
+    description: Allows OP's to make a manual backup
     usage: /ssBackup
