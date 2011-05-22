@@ -79,7 +79,7 @@ public class SimpleSave extends JavaPlugin {
 			ConfigArray = FixConfig();
 
 		}
-		log.info("SimpleSave: 3.03 Initialized");
+		log.info("SimpleSave: 3.05 Initialized");
 
 		if(ConfigArray[17].equals("true")){
 			setY(true);
