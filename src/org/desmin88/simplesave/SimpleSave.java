@@ -11,6 +11,10 @@ import java.util.logging.Filter;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
+
+
+import net.minecraft.server.WorldServer;
+
 import org.bukkit.event.*;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.ChatColor;
@@ -18,6 +22,8 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -76,8 +82,7 @@ public class SimpleSave extends JavaPlugin {
 		log.info("SimpleSave: 3.03 Initialized");
 
 		if(ConfigArray[17].equals("true")){
-			ConsoleCommandSender ccs = new ConsoleCommandSender(getServer());
-			getServer().dispatchCommand(ccs, "save-off");
+			setY(true);
 		}
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.PLAYER_JOIN, playerListener, Priority.Monitor, this);
@@ -151,6 +156,13 @@ public class SimpleSave extends JavaPlugin {
 		return taskID;
 	}
 
+	public boolean setY(Boolean b) {
+		for(int i = 0; i < ((CraftServer) getServer()).getHandle().server.worlds.size(); i++ ) {
+			WorldServer ws = ((CraftServer) getServer()).getHandle().server.worlds.get(i);
+			ws.y = b;
+		}
+		return false;
+	}
 	public void saveWorlds() {
 
 		for(World world : getServer().getWorlds()) { world.save();}
