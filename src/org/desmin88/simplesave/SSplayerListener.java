@@ -1,9 +1,5 @@
 package org.desmin88.simplesave;
 
-
-import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerListener;
@@ -17,16 +13,9 @@ public class SSplayerListener extends PlayerListener{
 		if(playercount > 0) {
 			this.players = playercount;
 		}
-
 	}
-
-
-
-
-
 	@Override
 	public void onPlayerJoin(PlayerJoinEvent event) {
-
 		players++;
 		if(players == 1) {
 			if(plugin.ConfigArray[0].equals("true")){

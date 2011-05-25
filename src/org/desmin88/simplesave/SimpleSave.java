@@ -46,22 +46,16 @@ public class SimpleSave extends JavaPlugin {
 	@Override
 	public void onEnable()   {
 		SSplayerListener playerListener = new SSplayerListener(this,getServer().getOnlinePlayers().length);
-
 		log = Logger.getLogger("Minecraft");
 		PluginDescriptionFile pdfFile = getDescription();
 		String version = pdfFile.getVersion();
-
 		Logger.getLogger("Minecraft").setFilter(new CCSFilter());
-
-
 		try {
 			MakeConfig();
 			ConfigArray = ReadConfig();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-
 		for(Object o : ConfigArray) {
 			if(o == null) {
 				log.severe("SimpleSave: Config file is malformed, regenerating with defaults.") ;
@@ -69,14 +63,12 @@ public class SimpleSave extends JavaPlugin {
 			}
 
 		}
-
 		if(!ConfigArray[12].equals(version)){
 			log.warning("SimpleSave: Running version below " + version + ", the config file is outdated. Regenerating");
 			ConfigArray = FixConfig();
 
 		}
 		log.info("SimpleSave: 3.05 Initialized");
-
 		if(ConfigArray[17].equals("true")){
 			setY(true);
 		}
@@ -88,7 +80,6 @@ public class SimpleSave extends JavaPlugin {
 	}
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-
 		String[] split = args;
 		String commandName = command.getName().toLowerCase();
 		if (sender instanceof Player) {
@@ -104,12 +95,9 @@ public class SimpleSave extends JavaPlugin {
 		return true;
 	}
 
-
 	public class SaveMethod implements Runnable {
 		@Override
 		public void run() {
-
-
 			if(ConfigArray[4].equals("true")) {
 				log.info(ConfigArray[2]);
 				getServer().broadcastMessage(ChatColor.valueOf(ConfigArray[5]) + ConfigArray[2]);
@@ -125,13 +113,11 @@ public class SimpleSave extends JavaPlugin {
 	public class BackupMethod implements Runnable{
 		@Override
 		public void run() {
-
 			if(ConfigArray[10].equals("true")) {
 				log.info(ConfigArray[8]);
 				getServer().broadcastMessage(ChatColor.valueOf(ConfigArray[11]) + ConfigArray[8]);
 			}
 			bu.backup();
-
 			if(ConfigArray[10].equals("true")) {
 				log.info(ConfigArray[9]);
 				getServer().broadcastMessage(ChatColor.valueOf(ConfigArray[11]) + ConfigArray[9]);
@@ -140,9 +126,6 @@ public class SimpleSave extends JavaPlugin {
 		}
 
 	}
-
-
-
 	public int ScheduleSave(long interval) {
 		int taskID = getServer().getScheduler().scheduleSyncRepeatingTask(this,new SaveMethod(),interval,interval);
 		return taskID;
@@ -152,19 +135,19 @@ public class SimpleSave extends JavaPlugin {
 		return taskID;
 	}
 
-	public boolean setY(Boolean b) {
+	//Iterate through all world servers, set their y value to b
+	public void setY(Boolean b) {
 		for(int i = 0; i < ((CraftServer) getServer()).getHandle().server.worlds.size(); i++ ) {
 			WorldServer ws = ((CraftServer) getServer()).getHandle().server.worlds.get(i);
 			ws.y = b;
 		}
-		return false;
 	}
 	public void saveWorlds() {
 
 		for(World world : getServer().getWorlds()) { world.save();}
 		getServer().savePlayers();
 	}
-	class CCSFilter implements Filter{
+	public class CCSFilter implements Filter{
 		String LS1 = "Disabling level saving..";
 		String LS2 = "ConsoleCommandSender: Disabling level saving..";
 		String LS3 = "Enabling level saving..";
@@ -245,7 +228,7 @@ public class SimpleSave extends JavaPlugin {
 		File configfile = new File("plugins/SimpleSave/config.properties");
 		boolean b = configfile.delete();
 		if(b == false) {
-			System.out.println("SimpleSave: Error deleting config file. Open in another program?");
+			log.severe("SimpleSave: Error deleting config file. Open in another program?");
 		}
 		try {
 			MakeConfig();
