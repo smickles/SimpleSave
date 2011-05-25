@@ -18,6 +18,7 @@ import net.minecraft.server.WorldServer;
 import org.bukkit.event.*;
 import org.bukkit.event.Event.Priority;
 import org.bukkit.ChatColor;
+import org.bukkit.Server;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,20 +31,13 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SimpleSave extends JavaPlugin {
-
-	String version;
 	Logger log;
-	File Dir;
-	File configfile;
-	Writer configwrite = null;
-	Properties simplesaveproperties;
 	long saveinterval;
 	long backupinterval;
 	String[] ConfigArray = new String[21];
 	FileOutputStream out;
 	FileUtils fu = new FileUtils();
 	Backup bu = new Backup(this);
-	SSplayerListener playerListener = new SSplayerListener(this);
 	@Override
 	public void onDisable() {
 		getServer().getScheduler().cancelTasks(this);
@@ -51,9 +45,11 @@ public class SimpleSave extends JavaPlugin {
 
 	@Override
 	public void onEnable()   {
+		SSplayerListener playerListener = new SSplayerListener(this,getServer().getOnlinePlayers().length);
+
 		log = Logger.getLogger("Minecraft");
 		PluginDescriptionFile pdfFile = getDescription();
-		version = pdfFile.getVersion();
+		String version = pdfFile.getVersion();
 
 		Logger.getLogger("Minecraft").setFilter(new CCSFilter());
 
@@ -68,14 +64,14 @@ public class SimpleSave extends JavaPlugin {
 
 		for(Object o : ConfigArray) {
 			if(o == null) {
-				log.info("SimpleSave: Config file is malformed, regenerating with defaults.") ;
+				log.severe("SimpleSave: Config file is malformed, regenerating with defaults.") ;
 				ConfigArray = FixConfig();
 			}
 
 		}
 
 		if(!ConfigArray[12].equals(version)){
-			log.info("SimpleSave: Running version below " + version + ", the config file is outdated. Regenerating");
+			log.warning("SimpleSave: Running version below " + version + ", the config file is outdated. Regenerating");
 			ConfigArray = FixConfig();
 
 		}

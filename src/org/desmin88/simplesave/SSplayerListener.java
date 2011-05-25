@@ -10,12 +10,20 @@ import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class SSplayerListener extends PlayerListener{
-
 	private int players = 0;
 	public SimpleSave plugin;
-	public SSplayerListener(SimpleSave instance){
+	public SSplayerListener(SimpleSave instance,int playercount){
 		plugin = instance;
+		if(playercount > 0) {
+			this.players = playercount;
+		}
+
 	}
+
+
+
+
+
 	@Override
 	public void onPlayerJoin(PlayerJoinEvent event) {
 
@@ -56,3 +64,4 @@ public class SSplayerListener extends PlayerListener{
 		}
 	}
 }
+
