@@ -61,14 +61,13 @@ public class SimpleSave extends JavaPlugin {
 				log.severe("SimpleSave: Config file is malformed, regenerating with defaults.") ;
 				ConfigArray = FixConfig();
 			}
-
 		}
 		if(!ConfigArray[12].equals(version)){
 			log.warning("SimpleSave: Running version below " + version + ", the config file is outdated. Regenerating");
 			ConfigArray = FixConfig();
 
 		}
-		log.info("SimpleSave: 3.05 Initialized");
+		log.info("SimpleSave: 3.06 Initialized");
 		if(ConfigArray[17].equals("true")){
 			setY(true);
 		}
@@ -135,16 +134,15 @@ public class SimpleSave extends JavaPlugin {
 		return taskID;
 	}
 
-	//Iterate through all world servers, set their y value to b
+	//Fixes the new setting for worldserver boolean
 	public void setY(Boolean b) {
 		for(int i = 0; i < ((CraftServer) getServer()).getHandle().server.worlds.size(); i++ ) {
 			WorldServer ws = ((CraftServer) getServer()).getHandle().server.worlds.get(i);
-			ws.y = b;
+			ws.E = b;
 		}
 	}
 	public void saveWorlds() {
-
-		for(World world : getServer().getWorlds()) { world.save();}
+		for(World world : getServer().getWorlds()) { world.save(); }
 		getServer().savePlayers();
 	}
 	public class CCSFilter implements Filter{
@@ -159,7 +157,6 @@ public class SimpleSave extends JavaPlugin {
 		}
 
 	}
-
 
 	public void MakeConfig() throws IOException {
 		File Dir = new File("plugins/SimpleSave");
