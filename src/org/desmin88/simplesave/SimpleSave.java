@@ -16,7 +16,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Event.Priority;
@@ -163,12 +162,6 @@ public class SimpleSave extends JavaPlugin {
 			}
 		}
 
-		for (int i = 0; i < ((CraftServer) getServer()).getHandle().server.worlds
-				.size(); i++) {
-			WorldServer ws = ((CraftServer) getServer()).getHandle().server.worlds
-					.get(i);
-			ws.E = b;
-		}
 	}
 
 	public void saveWorlds() {
