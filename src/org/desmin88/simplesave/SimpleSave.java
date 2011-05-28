@@ -148,10 +148,11 @@ public class SimpleSave extends JavaPlugin {
 	}
 
 	// Fixes the new setting for worldserver boolean
-	public void setY(Boolean b) {
+	public void setY(boolean b) {
 		for (Field f : WorldServer.class.getFields()) {
 			if (f.getType().getName().equals("boolean")
-					&& !f.getName().equals("weirdIsOpCache")) {
+					&& !f.getName().equals("weirdIsOpCache")
+						&& !f.getName().getClass().toString().equals("class java.lang.String")){ // dirty, awful, 'I don't really know what I'm doing' line added by smickles
 				try {
 					f.setBoolean(WorldServer.class, b);
 				} catch (IllegalArgumentException e) {
